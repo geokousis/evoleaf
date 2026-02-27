@@ -1,10 +1,10 @@
 # EvoLeaf
 
-EvoLeaf is a customized self-hosted Overleaf Community Edition deployment based on the Overleaf Toolkit. It includes editor, compile, registration, package-management, and access-control changes on top of the standard CE stack.
+EvoLeaf is a customized self-hosted Overleaf Community Edition deployment based on the Overleaf Toolkit. It is intended as an overlay/customization layer above the standard toolkit, not a full replacement for the toolkit itself. It includes editor, compile, registration, package-management, and access-control changes on top of the standard CE stack.
 
 ## Base project
 
-This project is based on the open-source Overleaf Toolkit and the Overleaf Community Edition codebase, with additional custom deployment, UI, and workflow changes specific to EvoLeaf.
+This project is based on the open-source Overleaf Toolkit and the Overleaf Community Edition codebase, with additional deployment, UI, and workflow changes specific to EvoLeaf. The goal is to keep the upstream toolkit structure and runtime model, while layering local patches and deployment-specific behavior on top.
 
 ## What this repo contains
 
