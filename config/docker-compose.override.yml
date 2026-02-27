@@ -1,0 +1,34 @@
+---
+# Override to use overleaf-cep (Community Edition Extended) image
+# which re-enables track changes, comments, and other pro features.
+# See: https://github.com/yu-i-i/overleaf-cep
+services:
+  sharelatex:
+    image: overleafcep/sharelatex:6.1.1-ext-v3.5
+    volumes:
+      # Patch 1: show tracked deletions as strikethrough text in the code editor
+      # Regenerate if upgrading: run data/overleaf-patches/patch_track_changes.py
+      - /media/storage/kousis/overleaf-toolkit/data/overleaf-patches/codemirror-editor-9d7fac6de7c2ae486431.js:/overleaf/services/web/public/js/codemirror-editor-9d7fac6de7c2ae486431.js:ro
+      # Patch 2: add "Comment" button + inline form on tracked-change entries in review panel
+      # Regenerate if upgrading: run data/overleaf-patches/patch_review_panel.py
+      - /media/storage/kousis/overleaf-toolkit/data/overleaf-patches/6473-e8e14a0b9e574644021d.js:/overleaf/services/web/public/js/6473-e8e14a0b9e574644021d.js:ro
+      # Patch 3: compile/render from true-edit text (ignore pending suggestions)
+      - /media/storage/kousis/overleaf-toolkit/data/overleaf-patches/CompileClsiManager.mjs:/overleaf/services/web/app/src/Features/Compile/ClsiManager.mjs:ro
+      # Patch 3b: allow suggestionCompile flag through compile request options
+      - /media/storage/kousis/overleaf-toolkit/data/overleaf-patches/CompileController.mjs:/overleaf/services/web/app/src/Features/Compile/CompileController.mjs:ro
+      # Patch 3c: add /install TeX package installer page + API and top-nav tab
+      - /media/storage/kousis/overleaf-toolkit/data/overleaf-patches/router.mjs:/overleaf/services/web/app/src/router.mjs:ro
+      - /media/storage/kousis/overleaf-toolkit/data/overleaf-patches/ExpressLocals.mjs:/overleaf/services/web/app/src/infrastructure/ExpressLocals.mjs:ro
+      - /media/storage/kousis/overleaf-toolkit/data/overleaf-patches/TexPackageInstallerController.mjs:/overleaf/services/web/app/src/Features/ServerAdmin/TexPackageInstallerController.mjs:ro
+      - /media/storage/kousis/overleaf-toolkit/data/overleaf-patches/PublicRegisterController.mjs:/overleaf/services/web/app/src/Features/User/PublicRegisterController.mjs:ro
+      - /media/storage/kousis/overleaf-toolkit/data/overleaf-patches/install-react.pug:/overleaf/services/web/app/views/project/install-react.pug:ro
+      - /media/storage/kousis/overleaf-toolkit/data/overleaf-patches/register-public.pug:/overleaf/services/web/app/views/user/register-public.pug:ro
+      - /media/storage/kousis/overleaf-toolkit/data/overleaf-patches/install-packages.css:/overleaf/services/web/public/static/install-packages.css:ro
+      - /media/storage/kousis/overleaf-toolkit/data/overleaf-patches/install-packages.js:/overleaf/services/web/public/static/install-packages.js:ro
+      # Patch 3d: allow tlmgr installs from web workers (www-data) in /install UI
+      - /media/storage/kousis/overleaf-toolkit/data/overleaf-patches/910_check_texlive_images:/etc/my_init.d/910_check_texlive_images:ro
+      # Patch 4: add "Suggestion Compile" toggle in compile menu and pass flag in compile requests
+      - /media/storage/kousis/overleaf-toolkit/data/overleaf-patches/3553-9eb5b8c89b57644b51fc.js:/overleaf/services/web/public/js/3553-9eb5b8c89b57644b51fc.js:ro
+  nginx:
+    volumes:
+      - /media/storage/kousis/overleaf-toolkit/config/nginx/overleaf.htpasswd:/etc/nginx/overleaf.htpasswd:ro

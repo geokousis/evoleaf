@@ -3,9 +3,21 @@
 *.log
 tmp/
 *.swp
+__pycache__/
 
 config/**/*
 !config/.gitkeep
+!config/docker-compose.override.yml
+!config/overleaf.rc
+!config/variables.env.example
+!config/tex-packages-installed.txt
+!config/nginx/
+config/nginx/*
+!config/nginx/nginx.conf
+config/nginx/overleaf.htpasswd
+config/nginx/certs/
 
 data/**/*
 !data/.gitkeep
+!data/overleaf-patches/
+!data/overleaf-patches/**

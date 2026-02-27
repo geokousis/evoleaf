@@ -1,0 +1,40 @@
+extends ../layout-react
+
+block entrypointVar
+  - entrypoint = 'marketing'
+
+block css
+  link(rel='stylesheet' href=buildCssPath())
+  link(rel='stylesheet' href='/static/install-packages.css')
+
+block append meta
+  meta(name='ol-installPackagesApiBase' content='/install/api')
+
+block content
+  main#main-content.install-page
+    .container-fluid.install-shell
+      .install-hero
+        .install-badge Overleaf Utility
+        h1 TeX Package Installer
+        p
+          | Install TeX Live packages on this Overleaf server. Enter one or more package names separated by commas.
+      .install-panel
+        label.install-label(for='install-packages-input') Packages
+        textarea#install-packages-input.install-input(rows='3' placeholder='babel-greek, cbfonts, greek-inputenc')
+        .install-actions
+          button#install-packages-submit.btn.btn-primary(type='button') Install Packages
+          span#install-packages-status.install-status Idle
+      .install-panel#install-progress-panel(hidden)
+        .install-head
+          h2 Job Progress
+          span#install-job-state.install-pill queued
+        .install-progress-track
+          .install-progress-fill#install-progress-fill
+        .install-progress-meta#install-progress-meta 0 / 0 complete
+        .install-package-list#install-package-list
+      .install-panel#install-log-panel(hidden)
+        .install-head
+          h2 Activity Log
+        pre#install-log-output.install-log
+
+  script(src='/static/install-packages.js' nonce=scriptNonce)

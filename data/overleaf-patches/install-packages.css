@@ -1,0 +1,209 @@
+.install-page {
+  min-height: calc(100vh - 120px);
+  background: radial-gradient(900px 420px at 12% -2%, rgba(26, 151, 102, 0.1), transparent),
+    linear-gradient(145deg, #f4f8fb 0%, #edf3f7 100%);
+  padding: 28px 0 40px;
+}
+
+.install-shell {
+  max-width: 1080px;
+}
+
+.install-hero,
+.install-panel {
+  background: #fff;
+  border: 1px solid #e1ebf1;
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(16, 38, 55, 0.08);
+  padding: 18px 20px;
+  margin-bottom: 14px;
+}
+
+.install-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #0f8558;
+  background: #e7f5ed;
+  border-radius: 999px;
+  padding: 5px 9px;
+}
+
+.install-hero h1 {
+  margin: 10px 0 8px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #1f2f3e;
+}
+
+.install-hero p {
+  margin: 0;
+  color: #5c6f7f;
+}
+
+.install-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #243849;
+}
+
+.install-input {
+  width: 100%;
+  border: 1px solid #c7d6e0;
+  border-radius: 10px;
+  min-height: 96px;
+  padding: 11px;
+  font-size: 14px;
+  color: #243849;
+  background: #fff;
+  resize: vertical;
+}
+
+.install-input:focus {
+  outline: none;
+  border-color: #2b6da6;
+  box-shadow: 0 0 0 3px rgba(43, 109, 166, 0.15);
+}
+
+.install-actions {
+  margin-top: 11px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.install-status {
+  color: #5c6f7f;
+  font-size: 13px;
+}
+
+.install-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 9px;
+}
+
+.install-head h2 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.install-pill {
+  background: #edf3f7;
+  color: #355066;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 9px;
+}
+
+.install-pill.running { background: #e8f1fb; color: #2b6da6; }
+.install-pill.completed { background: #e8f6ef; color: #0f8558; }
+.install-pill.completed_with_errors,
+.install-pill.failed { background: #fbecec; color: #c04646; }
+
+.install-progress-track {
+  height: 9px;
+  border-radius: 999px;
+  background: #e5edf2;
+  overflow: hidden;
+}
+
+.install-progress-fill {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #1b95e1, #1aa166);
+  transition: width 0.2s ease;
+}
+
+.install-progress-meta {
+  margin-top: 7px;
+  color: #5c6f7f;
+  font-size: 13px;
+}
+
+.install-package-list {
+  margin-top: 13px;
+}
+
+.install-item {
+  border: 1px solid #e4edf3;
+  border-radius: 10px;
+  padding: 9px 11px;
+  background: #fbfdff;
+  margin-bottom: 9px;
+}
+
+.install-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.install-name {
+  font-weight: 700;
+}
+
+.install-badge-status {
+  background: #edf3f7;
+  color: #355066;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+}
+
+.install-badge-status.installing,
+.install-badge-status.checking,
+.install-badge-status.running {
+  background: #e8f1fb;
+  color: #2b6da6;
+}
+
+.install-badge-status.installed,
+.install-badge-status.already_installed {
+  background: #e8f6ef;
+  color: #0f8558;
+}
+
+.install-badge-status.not_found,
+.install-badge-status.failed,
+.install-badge-status.invalid_name {
+  background: #fbecec;
+  color: #c04646;
+}
+
+.install-msg {
+  margin-top: 6px;
+  color: #5c6f7f;
+  font-size: 13px;
+}
+
+.install-log {
+  margin: 0;
+  max-height: 320px;
+  overflow: auto;
+  border-radius: 10px;
+  background: #0f1c28;
+  color: #dbe9f7;
+  padding: 11px;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+@media (max-width: 700px) {
+  .install-hero h1 {
+    font-size: 26px;
+  }
+  .install-actions,
+  .install-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
