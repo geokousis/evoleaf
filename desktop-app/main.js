@@ -203,22 +203,23 @@ function promptForGatewayCredentials(parentWindow) {
     return activeAuthPrompt.promise;
   }
 
+  const state = promptState();
   const authWindow = new BrowserWindow({
     width: 420,
-    height: 360,
+    height: 390,
     title: 'EvoLeaf Gateway Login',
     resizable: false,
     minimizable: false,
     maximizable: false,
-    modal: Boolean(parentWindow),
-    parent: parentWindow || null,
+    modal: false,
+    parent: null,
+    show: false,
+    alwaysOnTop: true,
     autoHideMenuBar: true,
     backgroundColor: '#f4efe5',
     webPreferences: {
-      preload: path.join(__dirname, 'auth-preload.js'),
-      contextIsolation: true,
-      nodeIntegration: false,
-      sandbox: false,
+      contextIsolation: false,
+      nodeIntegration: true,
     },
   });
 
@@ -265,8 +266,139 @@ function promptForGatewayCredentials(parentWindow) {
     authWindow.on('closed', handleClosed);
   });
 
-  ipcMain.handleOnce('auth:get-prompt-state', () => promptState());
-  authWindow.loadFile(path.join(__dirname, 'auth', 'index.html'));
+  const inlineHtml = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EvoLeaf Gateway Login</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe5;
+      --panel: #fffaf0;
+      --ink: #122033;
+      --muted: #4f5d73;
+      --primary: #0f766e;
+      --secondary: #334155;
+      --border: rgba(18, 32, 51, 0.12);
+      font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at top left, rgba(217, 119, 6, 0.18), transparent 18rem),
+        linear-gradient(180deg, #fbf7ef 0%, var(--bg) 100%);
+      color: var(--ink);
+    }
+    .panel {
+      width: min(24rem, calc(100% - 2rem));
+      padding: 1.4rem;
+      border: 1px solid var(--border);
+      border-radius: 1.2rem;
+      background: var(--panel);
+      box-shadow: 0 24px 50px rgba(18, 32, 51, 0.16);
+    }
+    .eyebrow {
+      margin: 0 0 0.4rem;
+      color: #d97706;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+    h1 { margin: 0 0 0.6rem; font-size: 1.8rem; }
+    .message { margin: 0 0 1rem; color: var(--muted); line-height: 1.45; }
+    .field { display: block; margin-bottom: 0.9rem; }
+    .field span { display: block; margin-bottom: 0.35rem; font-weight: 600; }
+    .field input {
+      width: 100%;
+      min-height: 2.8rem;
+      padding: 0.75rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 0.8rem;
+      font: inherit;
+      color: var(--ink);
+      background: #fff;
+    }
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.7rem;
+      margin-top: 1.1rem;
+    }
+    .button {
+      min-height: 2.8rem;
+      padding: 0.75rem 1rem;
+      border: 0;
+      border-radius: 999px;
+      color: #fff;
+      cursor: pointer;
+      font: inherit;
+    }
+    .button-primary { background: var(--primary); }
+    .button-secondary { background: var(--secondary); }
+  </style>
+</head>
+<body>
+  <main class="panel">
+    <p class="eyebrow">Nginx gateway</p>
+    <h1>Sign in to EvoLeaf</h1>
+    <p class="message">${state.message.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</p>
+    <form id="login-form">
+      <label class="field">
+        <span>Username</span>
+        <input id="username" name="username" type="text" autocomplete="username" required value="${state.username.replace(/&/g, '&amp;').replace(/"/g, '&quot;')}">
+      </label>
+      <label class="field">
+        <span>Password</span>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+      </label>
+      <div class="actions">
+        <button class="button button-secondary" type="button" id="cancel-button">Cancel</button>
+        <button class="button button-primary" type="submit">Continue</button>
+      </div>
+    </form>
+  </main>
+  <script>
+    const { ipcRenderer } = require('electron');
+    const form = document.getElementById('login-form');
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    const cancelButton = document.getElementById('cancel-button');
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      ipcRenderer.send('auth:submit', {
+        username: username.value,
+        password: password.value
+      });
+    });
+
+    cancelButton.addEventListener('click', () => {
+      ipcRenderer.send('auth:cancel');
+    });
+
+    if (username.value) {
+      password.focus();
+    } else {
+      username.focus();
+    }
+  </script>
+</body>
+</html>`;
+
+  authWindow.once('ready-to-show', () => {
+    authWindow.show();
+    authWindow.focus();
+  });
+
+  authWindow.loadURL(`data:text/html;charset=utf-8,${encodeURIComponent(inlineHtml)}`);
 
   return activeAuthPrompt.promise;
 }
