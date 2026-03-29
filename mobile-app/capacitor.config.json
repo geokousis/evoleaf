@@ -1,0 +1,10 @@
+{
+  "appId": "com.evoleaf.mobile",
+  "appName": "EvoLeaf",
+  "webDir": "www",
+  "server": {
+    "url": "https://evo-leaf.com/",
+    "cleartext": false,
+    "androidScheme": "https"
+  }
+}

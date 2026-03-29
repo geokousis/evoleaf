@@ -6,6 +6,8 @@ SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 TOOLKIT_ROOT="$(realpath "$SCRIPT_DIR/..")"
 
 PKG_FILE=${1:-/var/lib/overleaf/system/tex-packages-installed.txt}
+TEXLIVE_YEAR="${OVERLEAF_TEXLIVE_YEAR:-2025}"
+TLMGR_REPOSITORY="${OVERLEAF_TLMGR_REPOSITORY:-https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/${TEXLIVE_YEAR}/tlnet-final}"
 
 echo "Reinstalling TeX packages from: $PKG_FILE"
 "$TOOLKIT_ROOT/bin/docker-compose" exec -T sharelatex /bin/bash -lc "
@@ -13,7 +15,7 @@ if [[ ! -f '$PKG_FILE' ]]; then
   echo 'Package list not found: $PKG_FILE'
   exit 1
 fi
-xargs -r -a '$PKG_FILE' tlmgr install && mktexlsr /usr/local/texlive/2025/texmf-dist || true
+xargs -r -a '$PKG_FILE' tlmgr --repository '$TLMGR_REPOSITORY' install && mktexlsr /usr/local/texlive/2025/texmf-dist || true
 chgrp -R www-data /usr/local/texlive/2025/tlpkg /usr/local/texlive/2025/texmf-var /usr/local/texlive/2025/texmf-dist
 chmod -R g+rwX /usr/local/texlive/2025/tlpkg /usr/local/texlive/2025/texmf-var /usr/local/texlive/2025/texmf-dist
 "

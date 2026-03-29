@@ -1,9 +1,13 @@
 .DS_Store
 .idea
 *.log
+*.pyc
 tmp/
 *.swp
 __pycache__/
+node_modules/
+dist/
+android/
 
 config/**/*
 !config/.gitkeep
@@ -21,3 +25,8 @@ data/**/*
 !data/.gitkeep
 !data/overleaf-patches/
 !data/overleaf-patches/**
+
+desktop-app/node_modules/
+desktop-app/dist/
+mobile-app/node_modules/
+mobile-app/android/

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f172a">
+  <title>EvoLeaf App</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/app/icons/app-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/app/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="panel hero">
+      <p class="eyebrow">Installable access shell</p>
+      <h1>EvoLeaf</h1>
+      <p class="intro">
+        Open the existing Overleaf instance from a mobile-friendly frontend on the same domain.
+        Your login persists through Overleaf's secure session cookie until you log out.
+      </p>
+      <div class="actions">
+        <a class="button button-primary" href="/project">Open projects</a>
+        <a class="button button-secondary" href="/login">Sign in</a>
+        <button class="button button-secondary" id="install-button" type="button" hidden>Install app</button>
+      </div>
+    </section>
+
+    <section class="panel status-panel">
+      <div>
+        <p class="eyebrow">Session</p>
+        <h2 id="session-title">Checking login</h2>
+        <p id="session-text">Verifying whether your Overleaf session is already active on this domain.</p>
+      </div>
+      <div class="actions">
+        <a class="button button-secondary" href="/register">Register</a>
+        <a class="button button-danger" href="/logout">Log out</a>
+      </div>
+    </section>
+
+    <section class="panel shortcuts">
+      <p class="eyebrow">Shortcuts</p>
+      <div class="shortcut-grid">
+        <a class="shortcut-card" href="/project">
+          <span class="shortcut-title">Projects</span>
+          <span class="shortcut-copy">Jump into your main workspace.</span>
+        </a>
+        <a class="shortcut-card" href="/templates">
+          <span class="shortcut-title">Templates</span>
+          <span class="shortcut-copy">Browse template starting points in the same account session.</span>
+        </a>
+        <a class="shortcut-card" href="/install">
+          <span class="shortcut-title">Packages</span>
+          <span class="shortcut-copy">Open the existing in-app package installer.</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app/app.js" defer></script>
+</body>
+</html>

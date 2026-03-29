@@ -21,8 +21,10 @@ pdflscape
 pdfpages
 placeins
 sidecap
+siunitx
 soul
 titlesec
 titling
 upquote
+wrapfig
 xcolor

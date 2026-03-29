@@ -1,0 +1,272 @@
+:root {
+  --bg: #0f1720;
+  --panel: #ffffff;
+  --text: #1c2733;
+  --muted: #62717f;
+  --green: #138a5b;
+  --green-soft: #e8f6ef;
+  --blue: #2f6fad;
+  --red: #c53f3f;
+  --amber: #bd7a12;
+  --shadow: 0 16px 34px rgba(16, 33, 51, 0.13);
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Noto Sans', 'Segoe UI', sans-serif;
+  background: radial-gradient(1200px 500px at 10% -5%, #1f8d6636, transparent),
+    linear-gradient(135deg, #f3f8fb 0%, #eaf2f6 100%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.background-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(850px 420px at 90% 0%, #2152811f, transparent 65%);
+}
+
+.container {
+  position: relative;
+  width: min(960px, 92vw);
+  margin: 28px auto 42px;
+  display: grid;
+  gap: 16px;
+}
+
+.header-card,
+.panel {
+  background: var(--panel);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid #e5edf2;
+}
+
+.header-card {
+  padding: 22px 24px;
+}
+
+.brand-pill {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  background: var(--green-soft);
+  border-radius: 999px;
+}
+
+h1 {
+  margin: 10px 0 10px;
+  font-size: clamp(24px, 3vw, 32px);
+}
+
+h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.panel {
+  padding: 18px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+textarea {
+  width: 100%;
+  border: 1px solid #c8d6df;
+  border-radius: 10px;
+  font-size: 15px;
+  padding: 12px;
+  resize: vertical;
+  min-height: 92px;
+  color: var(--text);
+  background: #fff;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px #2f6fad24;
+}
+
+.actions {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #149662 0%, #0f7f53 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+#status-line {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.progress-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pill {
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 10px;
+  background: #eef3f7;
+  color: #3b4f62;
+}
+
+.pill.running,
+.badge.running,
+.badge.installing,
+.badge.checking {
+  background: #e6f0fa;
+  color: #2f6fad;
+}
+
+.pill.completed,
+.badge.installed,
+.badge.already_installed {
+  background: #e8f6ef;
+  color: #138a5b;
+}
+
+.pill.completed_with_errors,
+.pill.failed,
+.badge.failed,
+.badge.invalid_name,
+.badge.not_found {
+  background: #fceaea;
+  color: var(--red);
+}
+
+.progress-bar-track {
+  margin-top: 12px;
+  width: 100%;
+  height: 9px;
+  border-radius: 999px;
+  background: #e8edf3;
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #1a94e0, #19a96f);
+  transition: width 0.2s ease;
+}
+
+.progress-meta {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.package-list {
+  margin-top: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.package-item {
+  border: 1px solid #e5edf2;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #fbfdff;
+}
+
+.package-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.pkg-name {
+  font-weight: 700;
+}
+
+.pkg-message {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.badge {
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  background: #eef3f7;
+  color: #3b4f62;
+}
+
+.log-panel pre {
+  margin: 0;
+  background: #0f1720;
+  color: #dde8f5;
+  border-radius: 10px;
+  padding: 12px;
+  overflow: auto;
+  max-height: 320px;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+code {
+  background: #f0f5f8;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+
+@media (max-width: 680px) {
+  .container {
+    width: 94vw;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .package-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

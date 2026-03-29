@@ -1,0 +1,162 @@
+:root {
+  color-scheme: light;
+  --bg: #f4efe5;
+  --panel: rgba(255, 252, 245, 0.9);
+  --panel-border: rgba(15, 23, 42, 0.12);
+  --ink: #122033;
+  --muted: #4f5d73;
+  --primary: #0f766e;
+  --primary-strong: #115e59;
+  --accent: #d97706;
+  --danger: #b42318;
+  --shadow: 0 24px 60px rgba(18, 32, 51, 0.12);
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(217, 119, 6, 0.18), transparent 26rem),
+    radial-gradient(circle at top right, rgba(15, 118, 110, 0.16), transparent 22rem),
+    linear-gradient(180deg, #fbf7ef 0%, var(--bg) 100%);
+}
+
+.shell {
+  width: min(68rem, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.5rem 0 3rem;
+}
+
+.panel {
+  margin-top: 1rem;
+  padding: 1.4rem;
+  border: 1px solid var(--panel-border);
+  border-radius: 1.5rem;
+  background: var(--panel);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow);
+}
+
+.hero {
+  padding-top: 1.75rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 0.75rem;
+  font-size: clamp(2.5rem, 9vw, 4.6rem);
+  line-height: 0.95;
+}
+
+h2 {
+  margin-bottom: 0.6rem;
+  font-size: 1.45rem;
+}
+
+.intro,
+#session-text,
+.shortcut-copy {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.2rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.9rem;
+  padding: 0.8rem 1.15rem;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+  transition: transform 120ms ease, opacity 120ms ease, background-color 120ms ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button-primary {
+  background: var(--primary);
+}
+
+.button-primary:hover {
+  background: var(--primary-strong);
+}
+
+.button-secondary {
+  background: #1f2937;
+}
+
+.button-danger {
+  background: var(--danger);
+}
+
+.status-panel {
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+}
+
+.shortcut-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0.9rem;
+}
+
+.shortcut-card {
+  display: block;
+  padding: 1rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.shortcut-title {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+@media (min-width: 720px) {
+  .shell {
+    padding-top: 2rem;
+  }
+
+  .status-panel {
+    grid-template-columns: 1.5fr auto;
+  }
+}

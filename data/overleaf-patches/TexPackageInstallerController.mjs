@@ -23,6 +23,10 @@ const SAVED_PACKAGES_FILE =
 const SAVED_PACKAGES_AUDIT_FILE =
   process.env.TEX_PACKAGE_AUDIT_FILE ||
   '/var/lib/overleaf/system/tex-packages-install-audit.log'
+const TEXLIVE_YEAR = process.env.OVERLEAF_TEXLIVE_YEAR || '2025'
+const TLMGR_REPOSITORY =
+  process.env.OVERLEAF_TLMGR_REPOSITORY ||
+  `https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/${TEXLIVE_YEAR}/tlnet-final`
 function parsePackageInput(input) {
   const values = String(input || '')
     .split(',')
@@ -180,6 +184,10 @@ async function persistSuccessfulPackage(jobId, requestedName, installTarget) {
 }
 
 function runCmd(args, onLine, options = {}) {
+  if (args[0] === 'tlmgr' && !args.includes('--repository')) {
+    args = ['tlmgr', '--repository', TLMGR_REPOSITORY, ...args.slice(1)]
+  }
+
   const timeoutMs =
     Number.isFinite(options.timeoutMs) && options.timeoutMs > 0
       ? options.timeoutMs

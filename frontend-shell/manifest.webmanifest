@@ -1,0 +1,18 @@
+{
+  "name": "EvoLeaf App",
+  "short_name": "EvoLeaf",
+  "description": "Installable frontend shell for the EvoLeaf Overleaf domain.",
+  "start_url": "/app/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f4efe5",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/app/icons/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
