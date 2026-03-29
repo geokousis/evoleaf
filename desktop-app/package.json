@@ -18,6 +18,8 @@
     "files": [
       "main.js",
       "preload.js",
+      "auth-preload.js",
+      "auth/**/*",
       "build/**/*"
     ],
     "linux": {

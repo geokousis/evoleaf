@@ -32,4 +32,3 @@ services:
   nginx:
     volumes:
       - /media/storage/kousis/overleaf-toolkit/config/nginx/overleaf.htpasswd:/etc/nginx/overleaf.htpasswd:ro
-      - /media/storage/kousis/overleaf-toolkit/frontend-shell:/usr/share/nginx/html/app:ro

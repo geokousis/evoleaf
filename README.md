@@ -10,7 +10,6 @@ This project is based on the open-source Overleaf Toolkit and the Overleaf Commu
 
 - Overleaf Toolkit deployment config
 - custom frontend and backend patches under `data/overleaf-patches/`
-- installable frontend shell under `frontend-shell/`
 - Electron desktop wrapper scaffold under `desktop-app/`
 - Capacitor Android wrapper scaffold under `mobile-app/`
 - local nginx gate configuration for shared access protection
@@ -102,13 +101,11 @@ Current expected deployment shape:
 1. Cloudflare Tunnel publishes `evo-leaf.com`
 2. tunnel origin points to local nginx on `http://localhost:8080`
 3. nginx applies shared basic auth
-4. nginx serves `/app/` as a static frontend shell
-5. nginx proxies the rest to Overleaf on the internal toolkit network
+4. nginx proxies traffic to Overleaf on the internal toolkit network
 
 Access modes:
 
 - Web: `https://evo-leaf.com/`
-- Installable browser app: `https://evo-leaf.com/app/`
 - Desktop package source: `desktop-app/`
 - Android package source: `mobile-app/`
 
@@ -134,7 +131,7 @@ cd /media/storage/kousis/overleaf-toolkit
 ./bin/docker-compose up -d --force-recreate sharelatex
 ```
 
-Reload only nginx after frontend-shell or nginx config changes:
+Reload only nginx after nginx config changes:
 
 ```bash
 cd /media/storage/kousis/overleaf-toolkit
